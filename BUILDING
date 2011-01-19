@@ -1,0 +1,12 @@
+1. Run "cmake ." in this directory
+2. Run "make" 
+
+This will create all tests in the "bin"-folder and the libraries in the source folder (in source build).
+If you want to an out of source build, just change the cmake command.
+
+
+By default, the debug symbols are enabled. This is not recommended for code that should perform well.
+To disable the debug symbols in order to increase the execution speed, run
+  cmake -DCMAKE_BUILD_TYPE=Release .
+and in order to change back to debug-mode
+  cmake -DCMAKE_BUILD_TYPE=Debug .

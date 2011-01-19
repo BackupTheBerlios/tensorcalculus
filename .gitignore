@@ -1,0 +1,31 @@
+# binary files
+bin
+**/*.a
+**/*.so
+**/*.dll
+*.a
+
+# all hidden files (including svn directories, exclude this file)
+.*
+**/.*
+!.gitignore
+
+# all makefiles
+Makefile
+**/Makefile
+
+# all generated cmake files, except our own
+CMakeFiles
+**/CMakeFiles
+CMakeCache.txt
+**/CMakeCache.txt
+*.cmake
+**/*.cmake
+!cmake/*.cmake
+
+# Common out-of-sorce build tree
+build/
+
+# Backup files
+*~
+

@@ -1,0 +1,20 @@
+TensorCalculus library
+
+Copyright (C) 2008-2011 Mike Espig (espig@mis.mpg.de)
+              2008      Marcel Schuster
+              2008      Andreas Killaitis
+              2008      Niel Waldren
+              2010      Wähnert (waehnert@mis.mpg.de)
+              2010-2011 Stefan Handschuh (handschu@mis.mpg.de)
+              2011      Henry Auer (hauer@mis.mpg.de)
+
+
+
+This library provides several classes representing tensors in different formats
+and algorithms to deal with them.
+
+The following packages are needed to build the library:
+ - blas (+headers) or mkl
+ - lapack (+headers) or mkl
+ - cmake
+ - cpp compiler
