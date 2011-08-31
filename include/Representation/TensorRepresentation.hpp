@@ -214,11 +214,11 @@ namespace TensorCalculus {
  				d = v.size();
  				TSIZE = sizeof(T);
 #ifdef ARGUMENT_CHECKS_ON
-				if (d != componentDimensions.size()) {
+				if (static_cast<unsigned int>(d) != componentDimensions.size()) {
 					throw std::invalid_argument("The number of components does not match the "
 							                    "number of component-dimensions.");
 				}
-				if (incidenceMatrix.size() > 0 && incidenceMatrix.size() != d + L) {
+				if (incidenceMatrix.size() > 0 && incidenceMatrix.size() != static_cast<unsigned int>(d + L)) {
 					throw std::invalid_argument("The number of components does not match the "
 							                    "number of component-connections.");
 				}
@@ -262,12 +262,12 @@ namespace TensorCalculus {
 					}
 #ifdef ARGUMENT_CHECKS_ON
 					if (n < d) {
-						if (v[n].size() != componentDimensions[n]*countProduct) {
+						if (v[n].size() != static_cast<unsigned int>(componentDimensions[n]*countProduct)) {
 							throw std::invalid_argument("The component vector v at position n "
 									                    "does not have the correct size.");
 						}
 					} else {
-						if (w[n-d].size() != countProduct) {
+						if (w[n-d].size() != static_cast<unsigned int>(countProduct)) {
 							throw std::invalid_argument("The component vector w at position n "
 									                    "does not have the correct size.");
 						}
@@ -293,7 +293,7 @@ namespace TensorCalculus {
 					(*this).incidenceMatrix = incidenceMatrix;
 					for (int n = 0; n < d+L; n++) {
 						for (int k = 0, l = incidenceMatrix[n].size(); k < l; k++) {
-							if (incidenceTable.size() < incidenceMatrix[n][k]+1) {
+							if (incidenceTable.size() < static_cast<unsigned int>(incidenceMatrix[n][k]+1)) {
 								incidenceTable.resize(incidenceMatrix[n][k]+1);
 							}
 							
@@ -973,7 +973,7 @@ namespace TensorCalculus {
 			
 			int getComponentDimension(int k) const {
 #ifdef ARGUMENT_CHECKS_ON
-				if (k < 0 || k >= componentDimensions.size()) {
+				if (k < 0 || static_cast<unsigned int>(k) >= componentDimensions.size()) {
 					throw std::invalid_argument("The given k is out of range.");
 				}
 #endif
@@ -1112,7 +1112,7 @@ namespace TensorCalculus {
 
 
 				/*
-				T result2 = sum_prod(summands);//*norm;
+				T result2 = sum_prod(summands);// *norm;
 
 				for (Index index1(summations); !index1.end(); ++index1) {
 					for (Index index2(representation.getSummations()); !index2.end(); ++index2) {
@@ -1385,7 +1385,7 @@ namespace TensorCalculus {
 					T factor = 1.0;
 
 					for (int mu = 0; mu < L; mu++) {
-						if (&representation != this || mu + d != k1 && mu + d != k2) {
+						if (&representation != this || (mu + d != k1 && mu + d != k2)) {
 							factor *= w[mu][partialVector2index(summations, countIndex1,
 									                            incidenceMatrix[mu+d])];
 						}

@@ -85,7 +85,7 @@ namespace TensorCalculus {
 					               const std::vector<T> &values) {
 				long rank = componentProduct(componentDimensions);
 #ifdef ARGUMENT_CHECKS_ON
-				if (rank != values.size()) {
+				if (static_cast<unsigned int>(rank) != values.size()) {
 					throw std::invalid_argument("The number of data points does not match "
 												"the dimension-product");
 				}

@@ -54,7 +54,7 @@ int main() {
   std::cout << "Determinant: " << s.get_determinant() << std::endl;
 
   std::vector< Simplex<double> > s2 = cross_product(s, s);
-  for (int i = 0; i < s2.size(); ++i) {
+  for (unsigned int i = 0; i < s2.size(); ++i) {
     std::cout << s2[i] << '\n';
   }
   

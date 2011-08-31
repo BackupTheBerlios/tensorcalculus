@@ -111,7 +111,7 @@ int main(int argc, const char* argv[]) {
         const std::vector<double>& t_mu = t.getVectorOfDimension(mu);
         const std::vector<double>& s_mu = s.getVectorOfDimension(mu);
         
-        for (int i = 0; i < s.getVectorOfDimension(mu).size(); ++i) {
+        for (unsigned int i = 0; i < s.getVectorOfDimension(mu).size(); ++i) {
           TEST_EQUAL(t_mu[i], s_mu[i]);
         }
       }

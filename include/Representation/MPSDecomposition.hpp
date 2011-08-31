@@ -79,12 +79,12 @@ namespace TensorCalculus{
          singularValues.resize(min);
 
          int Usize = min*m;
-         if(U.size() < Usize){
+         if(U.size() < static_cast<unsigned int>(Usize)){
             U.resize(Usize);
          }
 
          int VTsize = min * n[mu];
-         if(VT.size() < VTsize){
+         if(VT.size() < static_cast<unsigned int>(VTsize)){
             VT.resize(VTsize);
          }
          //std::cout<<"set work"<<std::endl;
@@ -171,7 +171,7 @@ namespace TensorCalculus{
       }//end computeVidalDecompostition
 
       void computeVidalDecomposition (std::vector<int> maxSummations){
-         if(maxSummations.size() != d-1){
+         if(maxSummations.size() != static_cast<unsigned int>(d-1)){
             std::cout<<"maxSummations has wrong size"<<std::endl;
          }
 
@@ -235,7 +235,7 @@ namespace TensorCalculus{
    }
 
    template <typename T>
-   void setEpsE(const int d, const T eps, std::vector <T> &epsMu){
+   void setEpsE(const unsigned int d, const T eps, std::vector <T> &epsMu){
       const T eps1Mu = eps / (T)(d-1);
       const T eps2Mu = eps1Mu * eps1Mu;
       if(epsMu.size() < d){
@@ -248,7 +248,7 @@ namespace TensorCalculus{
    }
 
    template <typename T>
-   void setEpsM(const int d, const T eps, std::vector <T> &epsMu){
+   void setEpsM(const unsigned int d, const T eps, std::vector <T> &epsMu){
         //for d=4
         if(d == 4){
            double k = 1000.0; // epsMu = (1, k, 1) in eps1Mu
@@ -267,7 +267,7 @@ namespace TensorCalculus{
      }
 
    template <typename T>
-   void setEpsF(const int d, const T eps, std::vector <T> &epsMu){
+   void setEpsF(const unsigned int d, const T eps, std::vector <T> &epsMu){
         const T eps1Mu = eps;
         const T eps2Mu = eps1Mu * eps1Mu;
         if(epsMu.size() < d){

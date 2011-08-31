@@ -87,9 +87,6 @@ void mpsVabijTruncation ();
 int main() {
    std::cout << "MPSTest..." << std::endl << std::endl;
 
-   int k = 35;
-   int n = 70;
-
    //mikeD3 (k,n);
    //TestingWithMikeD3 ();
    //c4AOchemicalDecomp ();
@@ -838,16 +835,15 @@ void MPSwrite (){
 }
 
 void testFullMP2 (){
-   int i=0;
-   int occ;
-   int virt;
-   int occB;
-   int virtB;
+   int occB = 0;
+   int virtB = 0;
+   int occ = 0;
+   int virt = 0;
    readOccN(occ, occB, virt, virtB);
 
-   int aoCount  = occ + virt;
    std::vector<double> fullao;
 
+   int aoCount = occ + virt;
    readAO(aoCount, fullao);
 
 
@@ -948,7 +944,7 @@ void testHadamard (){
    std::vector<double> cpFull(cp.evaluate());
    std::vector<double> mpsFull(mps.evaluate());
    std::vector<double> hadFull(mpsFull.size());
-   for(int i=0; i<cpFull.size(); i++){
+   for(unsigned int i=0; i<cpFull.size(); i++){
       hadFull[i]=cpFull[i]*mpsFull[i];
    }
    std::cout<<"norm(hadamard) = "<<l2_norm(hadFull)<<std::endl;
@@ -1051,25 +1047,25 @@ void testEdgeAdd(){
    MPSv[d-1].resize(summations[d-2]*n);
    MPSv2[0].resize(summations2[0]*n);
    MPSv2[d-1].resize(summations2[d-2]*n);
-   for(int i=0; i<MPSv[0].size(); i++){
+   for(unsigned int i=0; i<MPSv[0].size(); i++){
       MPSv[0][i]= Utilities<double>::rand();
    }
-   for(int i=0; i<MPSv[d-1].size(); i++){
+   for(unsigned int i=0; i<MPSv[d-1].size(); i++){
       MPSv[d-1][i]= Utilities<double>::rand();
    }
-   for(int i=0; i<MPSv2[0].size(); i++){
+   for(unsigned int i=0; i<MPSv2[0].size(); i++){
       MPSv2[0][i]= Utilities<double>::rand();
    }
-   for(int i=0; i<MPSv2[d-1].size(); i++){
+   for(unsigned int i=0; i<MPSv2[d-1].size(); i++){
       MPSv2[d-1][i]= Utilities<double>::rand();
    }
    for(int mu=1; mu<d-1; mu++){
       MPSv[mu].resize(summations[mu-1]*summations[mu]*n);
       MPSv2[mu].resize(summations2[mu-1]*summations2[mu]*n);
-      for(int i=0; i<MPSv[mu].size(); i++){
+      for(unsigned int i=0; i<MPSv[mu].size(); i++){
          MPSv[mu][i]= Utilities<double>::rand();
       }
-      for(int i=0; i<MPSv2[mu].size(); i++){
+      for(unsigned int i=0; i<MPSv2[mu].size(); i++){
          MPSv2[mu][i]= Utilities<double>::rand();
       }
    }

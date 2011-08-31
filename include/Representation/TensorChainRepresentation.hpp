@@ -228,7 +228,7 @@ namespace TensorCalculus {
 
 				int dimension = this->componentDimensions[mu];
 
-				if (destination.size() < R_mu*R_mu_plus_1*r_mu*r_mu_plus_1) {
+				if (destination.size() < static_cast<unsigned int>(R_mu*R_mu_plus_1*r_mu*r_mu_plus_1)) {
 					destination.resize(R_mu*R_mu_plus_1*r_mu*r_mu_plus_1);
 				}
 
@@ -267,10 +267,10 @@ namespace TensorCalculus {
 
 				//std::cout << "reshape von " << R_mu2* r_mu2 << "x" << R_mu1*r_mu1 << " nach "  << r_mu1*r_mu2 <<"x"<< R_mu1*R_mu2 << std::endl;
 
-				if (destination.size() < R_mu1*R_mu2*r_mu1*r_mu2) {
+				if (destination.size() < static_cast<unsigned int>(R_mu1*R_mu2*r_mu1*r_mu2)) {
 					destination.resize(R_mu1*R_mu2*r_mu1*r_mu2);
 				}
-				if (source.size() < R_mu1*R_mu2*r_mu1*r_mu2) {
+				if (source.size() < static_cast<unsigned int>(R_mu1*R_mu2*r_mu1*r_mu2)) {
 					throw std::invalid_argument("source has wrong size.");
 				}
 
@@ -551,7 +551,7 @@ namespace TensorCalculus {
 				T partialNormSumSQR = Blas<T>::asum(this->summations[mu]*this->summations[mu_plus_2],
 												    &dummy_B[0],
 													this->summations[mu]*this->summations[mu_plus_2]+1);
-				if (dummy_B.size() < sqr(this->summations[mu]*this->summations[mu_plus_2])) {
+				if (dummy_B.size() < static_cast<unsigned int>(sqr(this->summations[mu]*this->summations[mu_plus_2]))) {
 					throw std::invalid_argument("dummy_B does not have the required size.");
 				}
 
@@ -1110,7 +1110,7 @@ namespace TensorCalculus {
 
 		for (int n = 0; n < d; n++) {
 			v_tc[n].resize(summations[n]*summations[(n+1) % d]*componentDimensions[n]);
-			for (int k = 0; k < v_tc[n].size(); k++) {
+			for (unsigned int k = 0; k < v_tc[n].size(); k++) {
 				v_tc[n][k] = randomNumberGenerator();
 			}
 		}

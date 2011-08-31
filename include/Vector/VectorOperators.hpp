@@ -372,7 +372,7 @@ namespace TensorCalculus {
       if (y.size() < x.size()) {
         y.resize(x.size(), 1);
       }
-      for (int i = 0; i < x.size(); ++i) {
+      for (unsigned int i = 0; i < x.size(); ++i) {
         y[i] *= x[i];
       }
     }

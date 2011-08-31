@@ -92,7 +92,7 @@ int main() {
 
 	std::vector<int> nSummations(tc0.getSummations());
 
-	for (int n = 0; n < nSummations.size(); n++) {
+	for (unsigned int n = 0; n < nSummations.size(); n++) {
 		nSummations[n]++;
 	}
 	TensorRepresentation<double> tc1 = createRandomTensorRepresentation(nSummations,
