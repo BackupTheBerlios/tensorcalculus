@@ -21,7 +21,7 @@
 #include "LapackInterface2.hpp"
 #include "DKTS.hpp"
 #include "DGKTSDCG.hpp"
-#include "Utilities/Utilities.hpp"
+#include <Utilities/Random.hpp>
 
 using namespace TensorCalculus;
 
@@ -33,7 +33,7 @@ void testALS() {
 
 	TensorCalculus::CPTensorRepresentation<double> cpTensor("data/tensors/H2O 6-31G/v_ijkl.ten");
 
-	TensorRepresentation<double> tensorChain = createRandomCPTensor(72, cpTensor.getD(), cpTensor.getComponentDimensions(), Utilities<double>::rand);
+	TensorRepresentation<double> tensorChain = createRandomCPTensor<double>(72, cpTensor.getD(), cpTensor.getComponentDimensions(), TensorCalculus::Random<double>());
 	
 	double norm = l2norm(cpTensor);
 

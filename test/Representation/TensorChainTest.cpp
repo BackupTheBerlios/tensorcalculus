@@ -16,7 +16,7 @@
  */
 
 #include "Representation/TensorChainRepresentation.hpp"
-#include "Utilities/Utilities.hpp"
+#include "Utilities/Random.hpp"
 
 using namespace TensorCalculus;
 
@@ -30,9 +30,9 @@ int main() {
 
 	int r = 3;
 
-	TensorChainRepresentation<double> tc1 = createRandomTensorChain(r-1, d, n, Utilities<double>::rand);
+	TensorChainRepresentation<double> tc1 = createRandomTensorChain<double>(r-1, d, n, Random<double>());
 
-	TensorChainRepresentation<double> tc2 = createRandomTensorChain(r, d, n, Utilities<double>::rand);
+	TensorChainRepresentation<double> tc2 = createRandomTensorChain<double>(r, d, n, Random<double>());
 
 	std::cout << "Original norm=" << l2norm(tc1) << std::endl;
 	std::cout << "Original norm=" << l2_norm(tc1.evaluate() -  tc2.evaluate()) << std::endl;

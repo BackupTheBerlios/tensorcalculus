@@ -1909,10 +1909,10 @@ namespace TensorCalculus {
 
 	};
 	
-	template<typename T>
+	template<typename T, typename Generator>
 	TensorRepresentation<T> createRandomTensorRepresentation
 			(const std::vector<int> &summations, const std::vector<int> componentDimensions,
-			 const std::vector< std::vector<int> > incidenceMatrix, T (*randomNumberGenerator)()) {
+			 const std::vector< std::vector<int> > incidenceMatrix, Generator generator) {
 		int d = componentDimensions.size();
 
 		std::vector< std::vector<T> > v(d);
@@ -1923,16 +1923,16 @@ namespace TensorCalculus {
 					* componentDimensions[n];
 			v[n].resize(valueCount);
 			for (int k = 0; k < valueCount; k++) {
-				v[n][k] = randomNumberGenerator();
+				v[n][k] = generator();
 			}
 		}
 		return TensorRepresentation<T>(summations, v, componentDimensions, incidenceMatrix);
 	}
 
-	template<typename T>
+	template<typename T, typename Generator>
 	TensorRepresentation<T> createRandomTensorRepresentation
 			(int r, const std::vector<int> &componentDimensions,
-			 const std::vector< std::vector<int> > &incidenceMatrix, T (*randomNumberGenerator)()) {
+			 const std::vector< std::vector<int> > &incidenceMatrix, Generator generator) {
 		std::vector<int> summationNumbers;
 
 		int d = componentDimensions.size();
@@ -1951,8 +1951,8 @@ namespace TensorCalculus {
 		for (int n = 0; n < i; n++) {
 			summations[n] = r;
 		}
-		return createRandomTensorRepresentation(summations, componentDimensions,
-				                                incidenceMatrix, randomNumberGenerator);
+		return createRandomTensorRepresentation<T>(summations, componentDimensions,
+				                                       incidenceMatrix, generator);
 	}
 
 	template<typename T> TensorRepresentation<T> operator +

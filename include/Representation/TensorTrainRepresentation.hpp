@@ -41,8 +41,8 @@ namespace TensorCalculus {
 			}
 	};
 
-	template<typename T>
-	TensorTrainRepresentation<T> createRandomTensorTrain(int ttRank, const std::vector<int> &componentDimensions, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorTrainRepresentation<T> createRandomTensorTrain(int ttRank, const std::vector<int> &componentDimensions, Generator generator) {
 		int d = componentDimensions.size();
 
 		std::vector< std::vector<T> > v_tt(d);
@@ -54,7 +54,7 @@ namespace TensorCalculus {
 		v_tt[d-1].resize(componentDimensions[d-1]*ttRank);
 		for (int n = 0; n < d; n++) {
 			for (int k = 0; k < v_tt[n].size(); k++) {
-				v_tt[n][k] = randomNumberGenerator();
+				v_tt[n][k] = generator();
 			}
 		}
 
@@ -63,11 +63,11 @@ namespace TensorCalculus {
 		return tensorTrain;
 	}
 
-	template<typename T>
-	TensorTrainRepresentation<T> createRandomTensorTrain(int rank, int d, int componentDimension, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorTrainRepresentation<T> createRandomTensorTrain(int rank, int d, int componentDimension, Generator generator) {
 		std::vector<int> componentDimensions(d, componentDimension);
 
-		return createRandomTensorTrain(rank, componentDimensions, randomNumberGenerator);
+		return createRandomTensorTrain<T>(rank, componentDimensions, generator);
 	}
 
 }

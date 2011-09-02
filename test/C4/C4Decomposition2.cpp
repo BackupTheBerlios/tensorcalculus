@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <Utilities/Utilities.hpp>
+#include <Utilities/Random.hpp>
 #include <Tensor/FullTensor.hpp>
 #include <Representation/MPSRepresentation.hpp>
 #include <CC/C4Interface.hpp>
@@ -161,6 +161,8 @@ void DecomposeFullAO2CC (const char *in, const char * out, const int rank1, cons
 
 TensorRepresentation<double> CCstartValue (int rank1, int rank2, MPSRepresentation<double> &in){
 
+   Random<double> random;
+   
    std::vector<std::vector<double> > v(4);
    v[0].resize(in.getComponentDimension(0)*rank1);
    v[1].resize(in.getComponentDimension(0)*rank1);
@@ -168,17 +170,17 @@ TensorRepresentation<double> CCstartValue (int rank1, int rank2, MPSRepresentati
    v[3].resize(in.getComponentDimension(0)*rank2);
    for(int mu=0; mu<2; mu++){
       for(int i=0; i<in.getComponentDimension(0)*rank1; i++){
-         v[mu][i] = Utilities<double>::rand();
+         v[mu][i] = random();
       }
       for(int i=0; i<in.getComponentDimension(0)*rank2; i++){
-         v[mu+2][i] = Utilities<double>::rand();
+         v[mu+2][i] = random();
       }
    }
 
    std::vector< std::vector<double> > w(1);
    w[0].resize(rank1*rank2);
    for(int i=0; i<rank1 * rank2; i++){
-      w[0][i] = Utilities<double>::rand();
+      w[0][i] = random();
    }
 
    std::vector<int> summations (2);

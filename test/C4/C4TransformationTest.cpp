@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include <Utilities/Utilities.hpp>
+#include <Utilities/Random.hpp>
 #include <Tensor/FullTensor.hpp>
 #include <Representation/MPSRepresentation.hpp>
 #include <C4Interface.hpp>
@@ -89,6 +89,7 @@ void MPSao2mo (const MPSRepresentation<double> input,const MPSRepresentation<dou
    summations[0]=1;
    summations[1]=1;
    summations[2]=1;
+   Random<double> random;
    std::vector<int> size(4);
    size[0] = summations[0];
    size[1] = summations[0] * summations[1];
@@ -98,7 +99,7 @@ void MPSao2mo (const MPSRepresentation<double> input,const MPSRepresentation<dou
       size[mu] *= mpsV_abij.getComponentDimension(mu);
       v[mu].resize(size[mu]);
       for(int i=0; i<size[mu]; i++)
-         v[mu][i] = Utilities<double>::rand();
+         v[mu][i] = random();
    }
    //rank 1 starttensor
    MPSRepresentation<double> mpsV_abij2 (summations, v, mpsV_abij.getComponentDimensions());

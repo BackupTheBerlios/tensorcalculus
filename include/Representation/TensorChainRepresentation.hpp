@@ -1102,8 +1102,8 @@ namespace TensorCalculus {
 		}
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(std::vector<int> &summations, std::vector<int> &componentDimensions, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(std::vector<int> &summations, std::vector<int> &componentDimensions, Generator generator) {
 		int d = componentDimensions.size();
 
 		std::vector< std::vector<T> > v_tc(d);
@@ -1111,7 +1111,7 @@ namespace TensorCalculus {
 		for (int n = 0; n < d; n++) {
 			v_tc[n].resize(summations[n]*summations[(n+1) % d]*componentDimensions[n]);
 			for (unsigned int k = 0; k < v_tc[n].size(); k++) {
-				v_tc[n][k] = randomNumberGenerator();
+				v_tc[n][k] = generator();
 			}
 		}
 
@@ -1120,18 +1120,18 @@ namespace TensorCalculus {
 		return tensorChain;
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(int tcRank, std::vector<int> &componentDimensions, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(int tcRank, std::vector<int> &componentDimensions, Generator generator) {
 		std::vector<int> summations(componentDimensions.size(), tcRank);
 
-		return createRandomTensorChain(summations, componentDimensions, randomNumberGenerator);
+		return createRandomTensorChain<T>(summations, componentDimensions, generator);
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(int rank, int d, int componentDimension, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(int rank, int d, int componentDimension, Generator generator) {
 		std::vector<int> componentDimensions(d, componentDimension);
 
-		return createRandomTensorChain(rank, componentDimensions, randomNumberGenerator);
+		return createRandomTensorChain<T>(rank, componentDimensions, generator);
 	}
 
 
