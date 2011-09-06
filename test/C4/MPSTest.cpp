@@ -35,7 +35,7 @@
 #include "CC/Amplitudes.hpp"
 #include "CC/SpinAdapt.hpp"
 
-#include "Utilities/Utilities.hpp"
+#include "Utilities/Random.hpp"
 
 using namespace TensorCalculus;
 using namespace VectorOperators;
@@ -86,9 +86,6 @@ void mpsVabijTruncation ();
 
 int main() {
    std::cout << "MPSTest..." << std::endl << std::endl;
-
-   int k = 35;
-   int n = 70;
 
    //mikeD3 (k,n);
    //TestingWithMikeD3 ();
@@ -838,16 +835,15 @@ void MPSwrite (){
 }
 
 void testFullMP2 (){
-   int i=0;
-   int occ;
-   int virt;
-   int occB;
-   int virtB;
+   int occB = 0;
+   int virtB = 0;
+   int occ = 0;
+   int virt = 0;
    readOccN(occ, occB, virt, virtB);
 
-   int aoCount  = occ + virt;
    std::vector<double> fullao;
 
+   int aoCount = occ + virt;
    readAO(aoCount, fullao);
 
 
@@ -895,6 +891,8 @@ void testHadamard (){
    int n = 3;
    int j = 3;
    int k = 2;
+   
+   TensorCalculus::Random<double> random;
 
    std::cout<<"d ="<<d<<std::endl;
    std::cout<<"n ="<<n<<std::endl;
@@ -912,7 +910,7 @@ void testHadamard (){
    for(int i=0; i<d; i++){
       CPv[i].resize(compDim[i]*k);
       for(int o=0; o< compDim[i]*k; o++){
-         CPv[i][o] = Utilities<double>::rand();
+         CPv[i][o] = random();
       }
    }
    std::cout<<"set cp ..."<<std::endl;
@@ -922,15 +920,15 @@ void testHadamard (){
    MPSv[0].resize(summations[0]*compDim[0]);
    MPSv[d-1].resize(summations[d-2]*compDim[d-1]);
    for(int i=0; i<summations[0]*compDim[0]; i++){
-      MPSv[0][i]= Utilities<double>::rand();
+      MPSv[0][i]= random();
    }
    for(int i = 0; i<summations[d-2]*compDim[d-1]; i++){
-      MPSv[d-1][i]= Utilities<double>::rand();
+      MPSv[d-1][i]= random();
    }
    for(int mu=1; mu<d-1; mu++){
       MPSv[mu].resize(summations[mu-1]*summations[mu]*compDim[mu]);
       for(int i=0; i<summations[mu-1]*summations[mu]*compDim[mu]; i++){
-         MPSv[mu][i]= Utilities<double>::rand();
+         MPSv[mu][i]= random();
       }
    }
    std::cout<<"set mps ..."<<std::endl;
@@ -948,7 +946,7 @@ void testHadamard (){
    std::vector<double> cpFull(cp.evaluate());
    std::vector<double> mpsFull(mps.evaluate());
    std::vector<double> hadFull(mpsFull.size());
-   for(int i=0; i<cpFull.size(); i++){
+   for(unsigned int i=0; i<cpFull.size(); i++){
       hadFull[i]=cpFull[i]*mpsFull[i];
    }
    std::cout<<"norm(hadamard) = "<<l2_norm(hadFull)<<std::endl;
@@ -956,6 +954,8 @@ void testHadamard (){
 }
 
 void testAdd(){
+      TensorCalculus::Random<double> random;
+  
       int d = 4;
       int n = 7;
       int j = 4;
@@ -982,21 +982,21 @@ void testAdd(){
       MPSv2[0].resize(k*n);
       MPSv2[d-1].resize(k*n);
       for(int i=0; i<j*n; i++){
-         MPSv[0][i]= Utilities<double>::rand();
-         MPSv[d-1][i]= Utilities<double>::rand();
+         MPSv[0][i]= random();
+         MPSv[d-1][i]= random();
       }
       for(int i=0; i<k*n; i++){
-         MPSv2[0][i]= Utilities<double>::rand();
-         MPSv2[d-1][i]= Utilities<double>::rand();
+         MPSv2[0][i]= random();
+         MPSv2[d-1][i]= random();
       }
       for(int mu=1; mu<d-1; mu++){
          MPSv[mu].resize(j*j*n);
          MPSv2[mu].resize(k*k*n);
          for(int i=0; i<j*j*n; i++){
-            MPSv[mu][i]= Utilities<double>::rand();
+            MPSv[mu][i]= random();
          }
          for(int i=0; i<k*k*n; i++){
-            MPSv2[mu][i]= Utilities<double>::rand();
+            MPSv2[mu][i]= random();
          }
       }
       std::cout<<"set mps ..."<<std::endl;
@@ -1016,6 +1016,8 @@ void testAdd(){
 }
 
 void testEdgeAdd(){
+   TensorCalculus::Random<double> random;
+  
    int d = 4;
    int n = 7;
    int i = 2;
@@ -1051,26 +1053,26 @@ void testEdgeAdd(){
    MPSv[d-1].resize(summations[d-2]*n);
    MPSv2[0].resize(summations2[0]*n);
    MPSv2[d-1].resize(summations2[d-2]*n);
-   for(int i=0; i<MPSv[0].size(); i++){
-      MPSv[0][i]= Utilities<double>::rand();
+   for(unsigned int i=0; i<MPSv[0].size(); i++){
+      MPSv[0][i]= random();
    }
-   for(int i=0; i<MPSv[d-1].size(); i++){
-      MPSv[d-1][i]= Utilities<double>::rand();
+   for(unsigned int i=0; i<MPSv[d-1].size(); i++){
+      MPSv[d-1][i]= random();
    }
-   for(int i=0; i<MPSv2[0].size(); i++){
-      MPSv2[0][i]= Utilities<double>::rand();
+   for(unsigned int i=0; i<MPSv2[0].size(); i++){
+      MPSv2[0][i]= random();
    }
-   for(int i=0; i<MPSv2[d-1].size(); i++){
-      MPSv2[d-1][i]= Utilities<double>::rand();
+   for(unsigned int i=0; i<MPSv2[d-1].size(); i++){
+      MPSv2[d-1][i]= random();
    }
    for(int mu=1; mu<d-1; mu++){
       MPSv[mu].resize(summations[mu-1]*summations[mu]*n);
       MPSv2[mu].resize(summations2[mu-1]*summations2[mu]*n);
-      for(int i=0; i<MPSv[mu].size(); i++){
-         MPSv[mu][i]= Utilities<double>::rand();
+      for(unsigned int i=0; i<MPSv[mu].size(); i++){
+         MPSv[mu][i]= random();
       }
-      for(int i=0; i<MPSv2[mu].size(); i++){
-         MPSv2[mu][i]= Utilities<double>::rand();
+      for(unsigned int i=0; i<MPSv2[mu].size(); i++){
+         MPSv2[mu][i]= random();
       }
    }
    for(int mu=0; mu<d; mu++){

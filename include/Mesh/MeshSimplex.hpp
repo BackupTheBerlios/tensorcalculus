@@ -113,7 +113,8 @@ namespace TensorCalculus {
     Blas<T>::gemm('N', 'T', d + 1, d + 1, d, 
                   1, &base_vectors_matrix[0], d + 1, &base_vectors_matrix[0], d + 1,
                   0, &A[0], d + 1);
-    T vu, vl;
+    T vu = T();
+    T vl = T();
     int m;
     std::vector<T> evl(d + 1);
     std::vector<T> evc((d + 1)*(d + 1));
@@ -257,9 +258,9 @@ namespace TensorCalculus {
     const int dimension = points_indices.size() - 1;
     T length = 0;
     std::vector<T> difference(dimension);
-    for (int i = 0; i < points_indices.size(); ++i) {
+    for (unsigned int i = 0; i < points_indices.size(); ++i) {
       const std::vector<T>& first = points[points_indices[i]].getCoordinates();
-      for (int j = i+1; j < points_indices.size(); ++j) {
+      for (unsigned int j = i+1; j < points_indices.size(); ++j) {
         const std::vector<T>& second = points[points_indices[j]].getCoordinates();
         Blas<T>::copy(dimension, &first[0], 1,
                                  &difference[0], 1);

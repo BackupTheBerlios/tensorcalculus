@@ -73,7 +73,7 @@ private:
 	   //todo: rückgabe von v ermöglichen?
 	   //--> bool computeV = false übergeben und an den test unten anhängen
 
-	    int d = (*this).componentDimensions.size();
+	    unsigned int d = (*this).componentDimensions.size();
 
 	    if(vTemp.size() < d){
 	       vTemp.resize(d);
@@ -89,7 +89,7 @@ private:
 	    //parameters for geqrf
 	    int m1; //--> zum Array machen
 	    int n1;
-	    int min;
+	    unsigned int min;
 	    int &lda1 = m1;
 	    std::vector< std::vector <double> > tau(d);    //saves tau from dgeqrf first,
                                                     //overwriten by s from dgesvd
@@ -97,7 +97,6 @@ private:
 	    //parameters for trmm
 	    int m2;
 	    int &n2    = n1;
-      int &lda2  = n2;
       int &ldb   = m2;
 
       //workspace for Lapack
@@ -198,9 +197,6 @@ private:
 	   std::vector<T> U;
 	   std::vector<T> VT;
 	   std::vector<T> S;
-	   int uSize;
-	   int vtSize;
-	   int initWork = -1;
 	   int lWork = -1;
 	   std::vector<T> work(1);
 	   for (int mu = 0; mu<d-1; mu++){

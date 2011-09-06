@@ -87,7 +87,7 @@ namespace TensorCalculus {
     std::vector< ValuesSimplex<T> > values_simplices = values_simplex.cross_product(s.values_simplex);
     std::vector<Domain::Simplex> result;
     result.reserve(values_simplices.size());
-    for (int i = 0; i < values_simplices.size(); ++i) {
+    for (unsigned int i = 0; i < values_simplices.size(); ++i) {
       result.push_back(Domain::Simplex(values_simplices[i], common_original_simplices));
     }
     return result;
@@ -98,8 +98,8 @@ namespace TensorCalculus {
   {
     std::vector<Domain::Simplex> new_simplices;
     new_simplices.reserve(simplices.size() * d.simplices.size() * 6);
-    for (int i = 0; i < simplices.size(); ++i) {
-      for (int j = 0; j < d.simplices.size(); ++j) {
+    for (unsigned int i = 0; i < simplices.size(); ++i) {
+      for (unsigned int j = 0; j < d.simplices.size(); ++j) {
         const std::vector<Domain::Simplex> parts = simplices[i].cross_product(d.simplices[j]);
         new_simplices.insert(new_simplices.end(),
                              parts.begin(), parts.end());

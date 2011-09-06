@@ -55,7 +55,7 @@ int main() {
   double sum = 0.0;
 
   std::cout << "Nodes: " << nodes.size() << '\n';
-  for (int i = 0; i < nodes.size(); ++i) {
+  for (unsigned int i = 0; i < nodes.size(); ++i) {
     const Node<std::vector<double>,double >& node = nodes[i];
     
     // using VectorOperators::operator <<;

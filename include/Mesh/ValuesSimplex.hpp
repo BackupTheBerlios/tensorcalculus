@@ -102,7 +102,7 @@ namespace TensorCalculus {
   void ValuesSimplex<T>::fill_matrix_and_origin(const std::vector< std::vector<T> >& values) {
 #if defined(RANGE_CHECKS_ON) || defined(_DEBUG) || !defined(NDEBUG)
     for (unsigned int i = 1; i < values.size(); ++i) {
-      if (values[i].size() != value_dim) {
+      if (values[i].size() != static_cast<unsigned int>(value_dim)) {
         throw std::invalid_argument("Values must have same size");
       }
     }

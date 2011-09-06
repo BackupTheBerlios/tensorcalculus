@@ -354,7 +354,7 @@ namespace TensorCalculus {
       Scalars result = 0;
       const unsigned int size = std::min(x.size(), y.size());
       StandardInnerProductSpaceTraits< std::vector<T> > traits;
-      for (int i = 0; i < size; ++i) {
+      for (unsigned int i = 0; i < size; ++i) {
         result += traits.innerProduct(x[i], y[i]);
       }
       return result;
@@ -372,7 +372,7 @@ namespace TensorCalculus {
       if (y.size() < x.size()) {
         y.resize(x.size(), 1);
       }
-      for (int i = 0; i < x.size(); ++i) {
+      for (unsigned int i = 0; i < x.size(); ++i) {
         y[i] *= x[i];
       }
     }

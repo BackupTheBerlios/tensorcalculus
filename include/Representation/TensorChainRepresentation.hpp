@@ -228,7 +228,7 @@ namespace TensorCalculus {
 
 				int dimension = this->componentDimensions[mu];
 
-				if (destination.size() < R_mu*R_mu_plus_1*r_mu*r_mu_plus_1) {
+				if (destination.size() < static_cast<unsigned int>(R_mu*R_mu_plus_1*r_mu*r_mu_plus_1)) {
 					destination.resize(R_mu*R_mu_plus_1*r_mu*r_mu_plus_1);
 				}
 
@@ -267,10 +267,10 @@ namespace TensorCalculus {
 
 				//std::cout << "reshape von " << R_mu2* r_mu2 << "x" << R_mu1*r_mu1 << " nach "  << r_mu1*r_mu2 <<"x"<< R_mu1*R_mu2 << std::endl;
 
-				if (destination.size() < R_mu1*R_mu2*r_mu1*r_mu2) {
+				if (destination.size() < static_cast<unsigned int>(R_mu1*R_mu2*r_mu1*r_mu2)) {
 					destination.resize(R_mu1*R_mu2*r_mu1*r_mu2);
 				}
-				if (source.size() < R_mu1*R_mu2*r_mu1*r_mu2) {
+				if (source.size() < static_cast<unsigned int>(R_mu1*R_mu2*r_mu1*r_mu2)) {
 					throw std::invalid_argument("source has wrong size.");
 				}
 
@@ -551,7 +551,7 @@ namespace TensorCalculus {
 				T partialNormSumSQR = Blas<T>::asum(this->summations[mu]*this->summations[mu_plus_2],
 												    &dummy_B[0],
 													this->summations[mu]*this->summations[mu_plus_2]+1);
-				if (dummy_B.size() < sqr(this->summations[mu]*this->summations[mu_plus_2])) {
+				if (dummy_B.size() < static_cast<unsigned int>(sqr(this->summations[mu]*this->summations[mu_plus_2]))) {
 					throw std::invalid_argument("dummy_B does not have the required size.");
 				}
 
@@ -1102,16 +1102,16 @@ namespace TensorCalculus {
 		}
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(std::vector<int> &summations, std::vector<int> &componentDimensions, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(std::vector<int> &summations, std::vector<int> &componentDimensions, Generator generator) {
 		int d = componentDimensions.size();
 
 		std::vector< std::vector<T> > v_tc(d);
 
 		for (int n = 0; n < d; n++) {
 			v_tc[n].resize(summations[n]*summations[(n+1) % d]*componentDimensions[n]);
-			for (int k = 0; k < v_tc[n].size(); k++) {
-				v_tc[n][k] = randomNumberGenerator();
+			for (unsigned int k = 0; k < v_tc[n].size(); k++) {
+				v_tc[n][k] = generator();
 			}
 		}
 
@@ -1120,18 +1120,18 @@ namespace TensorCalculus {
 		return tensorChain;
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(int tcRank, std::vector<int> &componentDimensions, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(int tcRank, std::vector<int> &componentDimensions, Generator generator) {
 		std::vector<int> summations(componentDimensions.size(), tcRank);
 
-		return createRandomTensorChain(summations, componentDimensions, randomNumberGenerator);
+		return createRandomTensorChain<T>(summations, componentDimensions, generator);
 	}
 
-	template<typename T>
-	TensorChainRepresentation<T> createRandomTensorChain(int rank, int d, int componentDimension, T (*randomNumberGenerator)()) {
+	template<typename T, typename Generator>
+	TensorChainRepresentation<T> createRandomTensorChain(int rank, int d, int componentDimension, Generator generator) {
 		std::vector<int> componentDimensions(d, componentDimension);
 
-		return createRandomTensorChain(rank, componentDimensions, randomNumberGenerator);
+		return createRandomTensorChain<T>(rank, componentDimensions, generator);
 	}
 
 

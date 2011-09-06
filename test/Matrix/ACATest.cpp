@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Utilities/Utilities.hpp"
+#include "Utilities/Random.hpp"
 #include "Matrix/MatrixOperators.hpp"
 
 using namespace TensorCalculus;
@@ -29,8 +29,9 @@ int main() {
 	std::vector<double> rows(rank*n);
 	std::vector<double> matrix(n*m);
 
-	for (int k = 0; k < n*m; k++) {
-		matrix[k] = Utilities<double>::rand();
+	Random<double> random;
+  for (int k = 0; k < n*m; k++) {
+		matrix[k] = random();
 	}
 
 	int eff_rank = aca(matrix, m, n, 1e-3, cols, rows);

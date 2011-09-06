@@ -52,7 +52,7 @@ int main(int argc, const char* argv[])
     
     std::vector< ValuesSimplex<double> > components = simplex.decompose();
     
-    for (int i = 0; i < components.size(); ++i) {
+    for (unsigned int i = 0; i < components.size(); ++i) {
       components[i].print(std::cout);
       std::cout << '\n';
     }
@@ -75,7 +75,7 @@ int main(int argc, const char* argv[])
     
     std::vector< ValuesSimplex<double> > components = simplex.decompose();
     
-    for (int i = 0; i < components.size(); ++i) {
+    for (unsigned int i = 0; i < components.size(); ++i) {
       components[i].print(std::cout);
       std::cout << '\n';
     }
@@ -83,7 +83,7 @@ int main(int argc, const char* argv[])
     
     std::cout << "self-cross product\n";
     std::vector< ValuesSimplex<double> > parts = simplex.cross_product(simplex);
-    for (int i = 0; i < parts.size(); ++i) {
+    for (unsigned int i = 0; i < parts.size(); ++i) {
       parts[i].print(std::cout);
       std::cout << '\n';
     }
@@ -105,7 +105,7 @@ int main(int argc, const char* argv[])
     simplex2.print(std::cout);
     std::cout << '\n';
     std::vector< ValuesSimplex<double> > blub = simplex.cross_product(simplex2); // simplex2.cross_product(simplex);
-    for (int i = 0; i < blub.size(); ++i) {
+    for (unsigned int i = 0; i < blub.size(); ++i) {
       blub[i].print(std::cout);
       std::cout << '\n';
     }

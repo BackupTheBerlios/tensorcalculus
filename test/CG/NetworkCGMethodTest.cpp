@@ -13,7 +13,8 @@
 #include "Representation/DistanceFunctionGradient.hpp"
 #include "Representation/CPTensorRepresentation.hpp"
 #include "Representation/TensorTrainRepresentation.hpp"
-#include "Utilities/Utilities.hpp"
+
+#include <Utilities/Random.hpp>
 
 
 using namespace TensorCalculus;
@@ -44,9 +45,9 @@ int main() {
 
   int n = 3;
 
-  const TensorTrainRepresentation<double> tt = createRandomTensorTrain(3, d, n, Utilities<double>::rand);//createRandomTensorTrain(10, d, 5, Utilities<double>::rand);
+  const TensorTrainRepresentation<double> tt = createRandomTensorTrain<double>(3, d, n, Random<double>());//createRandomTensorTrain(10, d, 5, Utilities<double>::rand);
 
-  TensorTrainRepresentation<double> tt_approx = createRandomTensorTrain(3, d, n, Utilities<double>::rand);//createRandomTensorTrain(10, d, 5, Utilities<double>::rand);
+  TensorTrainRepresentation<double> tt_approx = createRandomTensorTrain<double>(3, d, n, Random<double>());//createRandomTensorTrain(10, d, 5, Utilities<double>::rand);
 
   DistanceFunctionGradient< TensorTrainRepresentation<double> > gradient(tt, tt_approx);
 

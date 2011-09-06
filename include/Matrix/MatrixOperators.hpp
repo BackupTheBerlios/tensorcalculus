@@ -84,9 +84,9 @@ namespace TensorCalculus {
   void setSizesForSVD (const char jobu, const char jobvt, int m, int n, std::vector<T> &A,
         int lda, std::vector<T> &S, std::vector<T> &U, int ldu, std::vector<T> &VT, int ldvt,
         std::vector<T> &work, int &lwork){
-     int min = std::min(m,n);
-     int uSize;
-     int vtSize;
+     unsigned int min = std::min(m,n);
+     unsigned int uSize;
+     unsigned int vtSize;
      if(jobu == 'S' || jobu == 's'){
         uSize  = m * min;
         if(U.size()<uSize){

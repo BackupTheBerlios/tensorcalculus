@@ -31,7 +31,7 @@
 #include <math.h>
 // #include <string>
 
-#pragma warning(disable:4786)
+// #pragma warning(disable:4786)
 
 typedef float       Real;
 typedef double      LongReal;
@@ -179,8 +179,8 @@ This& enableAll##name##s() { bflag_##name = 0xFFFFFFFF; return *this; }  \
 
 
 //
-//           class ElementName##s : public SizeableArray<ElementType> {}; \
-//             ElementName##s cont_##ElementName;			\
+//           class ElementName##s : public SizeableArray<ElementType> {};
+//             ElementName##s cont_##ElementName;
 
 // Unterstützung für Container-Beziehungen
 #define CONTAINS(ElementType, ElementName)                                      \

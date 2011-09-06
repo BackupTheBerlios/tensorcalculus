@@ -24,7 +24,7 @@
 #include "Representation/TensorRepresentation.hpp"
 #include "Representation/CPTensorRepresentation.hpp"
 #include "Representation/TensorChainRepresentation.hpp"
-#include "Utilities/Utilities.hpp"
+#include "Utilities/Random.hpp"
 #include "Vector/VectorOperators.hpp"
 #include "DGKTSDCG.hpp"
 #include "Representation/MPSRepresentation.hpp"
@@ -81,7 +81,7 @@ int main() {
 	//cg4.truncate2Eps(1e-7, dkts4, dkts5);
 
 
-	TensorRepresentation<double> cp_p = createRandomCPTensor(50, cp4.getD(), std::vector<int>(cp4.getComponentDimensions()), Utilities<double>::zero);
+	TensorRepresentation<double> cp_p = createRandomCPTensor<double>(50, cp4.getD(), std::vector<int>(cp4.getComponentDimensions()), TensorCalculus::Random<double>(0.0, 0.0));
 
 
 	//int f = 0;
@@ -92,11 +92,11 @@ int main() {
 
 	std::vector<int> nSummations(tc0.getSummations());
 
-	for (int n = 0; n < nSummations.size(); n++) {
+	for (unsigned int n = 0; n < nSummations.size(); n++) {
 		nSummations[n]++;
 	}
-	TensorRepresentation<double> tc1 = createRandomTensorRepresentation(nSummations,
-			   tc0.getComponentDimensions(), tc0.getIncidenceMatrix(), Utilities<double>::zero);
+	TensorRepresentation<double> tc1 = createRandomTensorRepresentation<double>(nSummations,
+			   tc0.getComponentDimensions(), tc0.getIncidenceMatrix(), TensorCalculus::Random<double>(0.0, 0.0));
 
 
 	CPTensorRepresentation<double> cp1("data/tensors/H2O STO-3G/aoint.eps.ten");
@@ -120,7 +120,7 @@ int main() {
 
 	int d = cp1.getD();
 
-	CPTensorRepresentation<double> cp2 = createRandomCPTensor(2, d, cp1.getComponentDimensions(), Utilities<double>::rand);
+	CPTensorRepresentation<double> cp2 = createRandomCPTensor<double>(2, d, cp1.getComponentDimensions(), TensorCalculus::Random<double>());
 
 	std::cout << cp2[0] << std::endl;
 
@@ -136,10 +136,12 @@ int main() {
 
 	std::vector< std::vector<double> > v(d);
 
-	for (int n = 0; n < d; n++) {
+	TensorCalculus::Random<double> random;
+  
+  for (int n = 0; n < d; n++) {
 		v[n].resize(rank*componentDimensions[n]);
 		for (int r = 0, j = v[n].size(); r < j; r++) {
-			v[n][r] = Utilities<double>::rand();
+			v[n][r] = random();
 		}
 	}
 
@@ -150,7 +152,7 @@ int main() {
 	for (int n = 0; n < L; n++) {
 		w[n].resize(rank*rank);
 		for (int r = 0; r < rank*rank; r++) {
-			w[n][r] = Utilities<double>::rand();
+			w[n][r] = random();
 		}
 	}
 
@@ -205,7 +207,7 @@ int main() {
 		for (int n = 0; n < d; n++) {
 			v[n].resize(rank*componentDimensions[n]);
 			for (int r = 0, j = v[n].size(); r < j; r++) {
-				v[n][r] = Utilities<double>::rand();
+				v[n][r] = random();
 			}
 		}
 
@@ -216,7 +218,7 @@ int main() {
 		for (int n = 0; n < L; n++) {
 			w[n].resize(rank*rank);
 			for (int r = 0; r < rank*rank; r++) {
-				w[n][r] = Utilities<double>::rand();
+				w[n][r] = random();
 			}
 		}
 

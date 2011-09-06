@@ -85,7 +85,7 @@ namespace TensorCalculus {
 					               const std::vector<T> &values) {
 				long rank = componentProduct(componentDimensions);
 #ifdef ARGUMENT_CHECKS_ON
-				if (rank != values.size()) {
+				if (static_cast<unsigned int>(rank) != values.size()) {
 					throw std::invalid_argument("The number of data points does not match "
 												"the dimension-product");
 				}
@@ -127,15 +127,15 @@ namespace TensorCalculus {
 
 	};
 
-	template<typename T>
+	template<typename T, typename Generator>
 	CPTensorRepresentation<T> createRandomCPTensor(int rank, int d,
 			                                       const std::vector<int> &componentDimensions,
-			                                       T (*randomNumberGenerator)()) {
+			                                       Generator generator) {
 		std::vector< std::vector<T> > v_cp(d);
 		for (int n = 0; n < d; n++) {
 			v_cp[n].resize(rank*componentDimensions[n]);
 			for (int k = 0, j = v_cp[n].size(); k < j; k++) {
-				v_cp[n][k] = randomNumberGenerator();
+				v_cp[n][k] = generator();
 			}
 		}
 
@@ -144,14 +144,14 @@ namespace TensorCalculus {
 		return cpTensor;
 	}
 
-	template<typename T>
+	template<typename T, typename Generator>
 	CPTensorRepresentation<T> createRandomCPTensor(int rank, int d, int componentDimension,
-			                                       T (*randomNumberGenerator)()) {
+			                                       Generator generator) {
 		std::vector<int> componentDimensions(d);
 		for (int n = 0; n < d; n++) {
 			componentDimensions[n] = componentDimension;
 		}
-		return createRandomCPTensor(rank, d, componentDimensions, randomNumberGenerator);
+		return createRandomCPTensor<T>(rank, d, componentDimensions, generator);
 	}
 
 	template<typename T>
