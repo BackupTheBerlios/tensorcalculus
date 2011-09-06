@@ -98,7 +98,7 @@ public:
 double norm(const std::vector<double>& x)
 {
   double result = 0;
-  for (int i = 0; i < x.size(); ++i) {
+  for (unsigned int i = 0; i < x.size(); ++i) {
     const double xi = x[i];
     result += xi*xi;
   }

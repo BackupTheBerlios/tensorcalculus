@@ -30,7 +30,7 @@ void readAOSpinAdapted (std::vector<double> &fullAdaptAO){
 } //end readAOSpinAdapted
 
 void spinAdaptedAO (const int aoCount, const std::vector<double> &fullAO, std::vector<double> &fullAdaptAO){
-   int size = aoCount * aoCount * aoCount * aoCount;
+   unsigned int size = aoCount * aoCount * aoCount * aoCount;
    if(fullAdaptAO.size() < size){
       fullAdaptAO.resize(size);
    }
@@ -62,7 +62,7 @@ void readAOSpinAdaptedchemical (std::vector<double> &fullAdaptAO){
 } // end readAOSpinAdaptedchemical
 
 void spinAdaptedAOchemical (const int aoCount, const std::vector<double> &fullAO, std::vector<double> &fullAdaptAO){
-   int size = aoCount * aoCount * aoCount * aoCount;
+   unsigned int size = aoCount * aoCount * aoCount * aoCount;
    if(fullAdaptAO.size() < size){
       fullAdaptAO.resize(size);
    }

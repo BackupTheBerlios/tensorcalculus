@@ -53,8 +53,8 @@ namespace TensorCalculus {
 		}
 		v_tt[d-1].resize(componentDimensions[d-1]*ttRank);
 		for (int n = 0; n < d; n++) {
-			for (int k = 0; k < v_tt[n].size(); k++) {
-				v_tt[n][k] = randomNumberGenerator();
+			for (unsigned int k = 0; k < v_tt[n].size(); k++) {
+				v_tt[n][k] = generator();
 			}
 		}
 

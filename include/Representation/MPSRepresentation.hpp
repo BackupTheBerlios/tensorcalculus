@@ -78,7 +78,7 @@ private:
 	    if(vTemp.size() < d){
 	       vTemp.resize(d);
 	    }
-      for(int mu=0; mu<d; mu++){
+      for(unsigned int mu=0; mu<d; mu++){
          if(vTemp[mu].size() < (*this).v[mu].size()){
             vTemp[mu].resize((*this).v[mu].size());
          }
@@ -107,7 +107,7 @@ private:
 
 	    //left to right sweep
 	    //std::cout<<"left to right sweep"<<std::endl;
-	    for(int mu = d-1; mu > 0; mu--){
+	    for(unsigned int mu = d-1; mu > 0; mu--){
 	       //std::cout<<"mu = "<<mu<<std::endl;
 	       //what happens if m1 < n1? --> fixed
 	       if(mu==d-1){
@@ -746,7 +746,6 @@ public:
               (*this).componentDimensions[1], &w[0], (*this).summations[0], 0.0,
               &v[j * (*this).componentDimensions[1] * mps2.summations[0]], (*this).componentDimensions[1]);
      }
-     int k;
      for(int mu=1; mu<d-1; mu++){
         int k = (*this).componentDimensions[mu]*mps2.summations[mu-1];
         Blas<T>::gemm('t', 'n', (*this).summations[mu], mps2.summations[mu], k, 1.0, &v[0],

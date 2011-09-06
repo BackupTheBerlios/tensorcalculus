@@ -244,7 +244,7 @@ void testScalarProduct() {
 	std::vector<int> p1(2);
 	std::vector<int> p2(2);
 	
-	double temp1, temp2, temp3, product = 0;
+	double temp1, temp2, temp3 = 0;
 	
 	float c1 = clock();
 	/*

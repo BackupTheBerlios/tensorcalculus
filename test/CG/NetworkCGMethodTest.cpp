@@ -24,8 +24,8 @@ using namespace VectorOperators;
 double norm(const std::vector< std::vector<double> >& x)
 {
   double result = 0;
-  for (int i = 0; i < x.size(); ++i) {
-	for (int k = 0; k < x[i].size(); ++k) {
+  for (unsigned int i = 0; i < x.size(); ++i) {
+	for (unsigned int k = 0; k < x[i].size(); ++k) {
 		const double xi = x[i][k];
 		result += xi*xi;
 	}

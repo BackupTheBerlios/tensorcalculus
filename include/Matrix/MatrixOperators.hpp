@@ -300,8 +300,6 @@ namespace TensorCalculus {
 
 	  int min = std::min(n, m);
 
-	  int max = std::max(n, m);
-
 	  std::vector<T> workspace(4*min);
 
 	  T h_norm = Lapack<T>::lange('1', m, n, &matrix[0], m, 0); // 1-norm

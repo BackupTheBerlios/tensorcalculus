@@ -84,7 +84,7 @@ int main() {
 	TensorRepresentation<double> cp_p = createRandomCPTensor(50, cp4.getD(), std::vector<int>(cp4.getComponentDimensions()), Utilities<double>::zero);
 
 
-	int f = 0;
+	//int f = 0;
 	//cp0.performALS(cp0);
 	//std::cout << ++f << '\t' << l2_norm(cp0.evaluate() - cp_p.evaluate()) / l2_norm(cp0.evaluate()) << std::endl;
 

@@ -260,7 +260,7 @@ namespace TensorCalculus {
   T componentSum(const std::vector<T> &vector) {
 	T result = 0;
 
-	for (int n = 0, i = vector.size(); n < i; n++) {
+	for (unsigned int n = 0, i = vector.size(); n < i; n++) {
 	  result += vector[n];
 	}
 	return result;
@@ -268,11 +268,11 @@ namespace TensorCalculus {
 
   template<typename T>
   std::vector<T> compound(const std::vector<T> &main, const std::vector<T> &part) {
-    int length = part.size();
+	unsigned int length = part.size();
 
     std::vector<T> result(length);
 
-    for (int n = 0; n < length; n++) {
+    for (unsigned int n = 0; n < length; n++) {
   	  result[n] = indexOf(main, part[n]);
   	}
   	return result;
@@ -307,7 +307,7 @@ namespace TensorCalculus {
     {
       StandardVectorSpaceTraits< std::vector<T> > traits;
       y.resize(x.size());
-      for (int i = 0; i < x.size(); ++i) {
+      for (unsigned int i = 0, n = x.size(); i < n; ++i) {
         traits.update(alpha, x[i], y[i]);
       }
     }
@@ -315,7 +315,7 @@ namespace TensorCalculus {
     void scale(const Scalars alpha, Vectors& x) const
     {
       StandardVectorSpaceTraits< std::vector<T> > traits;
-      for (int i = 0; i < x.size(); ++i) {
+      for (unsigned int i = 0, n = x.size(); i < n; ++i) {
         traits.scale(alpha, x[i]);
       }
     }

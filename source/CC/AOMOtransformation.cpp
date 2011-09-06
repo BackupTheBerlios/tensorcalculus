@@ -186,7 +186,6 @@ namespace TensorCalculus {
 
       int n      = virtCount;
       int start  = occCount;
-      int K;
 
       for(int mu=0; mu<4; mu++){
          if(mu==2){

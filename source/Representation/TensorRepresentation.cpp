@@ -62,19 +62,19 @@ std::vector<int> index2vector(const std::vector<int> &summations, int index) {
 
 	int partialVector2index(const std::vector<int> &summations, const std::vector<int> &vector,
 			                const std::vector<int> incidenceRow) {
-		int size = incidenceRow.size();
+		unsigned int size = incidenceRow.size();
 
 		int position = 0;
 
 		int offset = 1;
 
 		if (vector.size() != size) {
-			for (int n = 0; n < size; n++) {
+			for (unsigned int n = 0; n < size; n++) {
 				position += vector[incidenceRow[n]]*offset;
 				offset *= summations[incidenceRow[n]];
 			}
 		} else {
-			for (int n = 0; n < size; n++) {
+			for (unsigned int n = 0; n < size; n++) {
 				position += vector[n]*offset;
 				offset *= summations[incidenceRow[n]];
 			}

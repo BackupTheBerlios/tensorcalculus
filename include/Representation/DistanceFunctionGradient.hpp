@@ -234,8 +234,6 @@ public:
     	this->x.fill_A_mu(this->a, this->d-1, ascA[this->d-2]);
     	this->x.fill_B_mu(this->d-1, ascB[this->d-2]);
     	for (int mu = this->d-2; mu > 0; mu--) {
-    		const int mu_plus_1 = (mu + 1) % this->d;
-
     		this->x.fill_A_mu(this->a, mu, dummyA);
     		this->x.fill_B_mu(mu, dummyB);
 

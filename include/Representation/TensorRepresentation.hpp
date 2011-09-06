@@ -1573,7 +1573,7 @@ namespace TensorCalculus {
 					}
 				}
 
-				T norm = l2norm(representation);
+				//T norm = l2norm(representation);
 
 				T norm_this = 0.0, norm_this_0 = l2norm(*this);
 

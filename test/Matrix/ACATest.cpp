@@ -34,5 +34,7 @@ int main() {
 	}
 
 	int eff_rank = aca(matrix, m, n, 1e-3, cols, rows);
+
+	std::cout << "eff rank " << eff_rank << std::endl;
 	return 0;
 }

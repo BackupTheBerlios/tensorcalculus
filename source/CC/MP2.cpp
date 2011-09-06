@@ -89,7 +89,7 @@ namespace TensorCalculus{
       double E2;
       const std::vector<int> &vs = v_abij.getSummations();
       const std::vector<int> &ts = t_abij.getSummations();
-      const std::vector<int> &n  = v_abij.getComponentDimensions();
+      //const std::vector<int> &n  = v_abij.getComponentDimensions();
 
       std::vector< std::vector <double> > w(4);
       w[0].resize(vs[0]*ts[0]);
@@ -235,7 +235,7 @@ namespace TensorCalculus{
       MPSRepresentation<double> v_abij(&v_abij_mps[0]);
       MPSRepresentation<double> t_abij(&t_abij_mps[0]);
 
-      mp2_mps(v_abij, t_abij, chemical);
+      return mp2_mps(v_abij, t_abij, chemical);
    }
 /*
    double mp2_mps (const double eps, const char *out, const bool chemical){

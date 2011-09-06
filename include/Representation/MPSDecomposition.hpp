@@ -242,7 +242,7 @@ namespace TensorCalculus{
          epsMu.resize(d);
       }
       epsMu[d-1] = eps2Mu;
-      for(int mu=0; mu<d-1; mu++){
+      for(unsigned int mu=0; mu<d-1; mu++){
          epsMu[mu] = eps1Mu;
       }
    }

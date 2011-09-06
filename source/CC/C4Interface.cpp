@@ -56,9 +56,9 @@ void readAO(std::vector<double> &fullao, const bool chemical){
   int i3 = 0;
   int i4 = 0;
   double value;
-  int aoCount2 = aoCount *aoCount;
-  int aoCount3 = aoCount2*aoCount;
-  int aoCount4 = aoCount3*aoCount;
+  unsigned int aoCount2 = aoCount *aoCount;
+  unsigned int aoCount3 = aoCount2*aoCount;
+  unsigned int aoCount4 = aoCount3*aoCount;
 
   if(fullao.size()<aoCount4){
      fullao.resize(aoCount4);
@@ -158,9 +158,9 @@ void readAO(std::vector<double> &fullao, const bool chemical){
    int i3 = 0;
    int i4 = 0;
    double value;
-   int aoCount2 = aoCount *aoCount;
-   int aoCount3 = aoCount2*aoCount;
-   int aoCount4 = aoCount3*aoCount;
+   unsigned int aoCount2 = aoCount *aoCount;
+   unsigned int aoCount3 = aoCount2*aoCount;
+   unsigned int aoCount4 = aoCount3*aoCount;
 
    if(fullao.size()<aoCount4){
       fullao.resize(aoCount4);
@@ -236,7 +236,7 @@ void readAO(std::vector<double> &fullao, const bool chemical){
 
  void readTransformationMatrix(const int virt,const int occ, std::vector<double> &virtAOMO, std::vector<double> &occAOMO){
     // tested
-   const int ao = virt+occ;
+   const unsigned int ao = virt+occ;
 
    std::ifstream fin("NEWMOS");
    if(fin.fail()){
@@ -256,13 +256,13 @@ void readAO(std::vector<double> &fullao, const bool chemical){
    // occAOMO   in Matrix(occ;ao)
    // virtAOMO  in Matrix(virt;ao);
    for(int i=0; i<occ; i++){
-      for(int j=0; j<ao; j++){
+      for(unsigned int j=0; j<ao; j++){
          fin >> occAOMO[i+j*occ];
       }
    }
 
    for(int i=0; i<virt; i++){
-      for(int j=0; j<ao; j++){
+      for(unsigned int j=0; j<ao; j++){
          fin >> virtAOMO[i+j*virt];
       }
    }
@@ -277,7 +277,7 @@ void readAO(std::vector<double> &fullao, const bool chemical){
     }
     fin.setf(std::ios::scientific, std::ios::floatfield);
 
-    if(fullTransposeAOMO.size() < aoCount*aoCount){
+    if(fullTransposeAOMO.size() < static_cast<unsigned int>(aoCount*aoCount)){
        fullTransposeAOMO.resize(aoCount* aoCount);
     }
 
@@ -293,7 +293,7 @@ void readAO(std::vector<double> &fullao, const bool chemical){
  void readOrbitalEnergies (std::vector<double> &f){
     int virt,occ;
     readOccN(occ,occ,virt,virt);
-    int aoCount = virt+occ;
+    unsigned int aoCount = virt+occ;
     if(f.size()<aoCount){
        f.resize(aoCount);
     }
@@ -303,7 +303,7 @@ void readAO(std::vector<double> &fullao, const bool chemical){
        return;
     }
     double temp;
-    for(int i=0; i<aoCount; i++){
+    for(unsigned int i=0; i<aoCount; i++){
        fin >> temp;
        f[i] = std::fabs(temp);
     }
